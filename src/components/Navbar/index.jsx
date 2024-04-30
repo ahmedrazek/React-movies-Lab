@@ -2,10 +2,16 @@ import { NavLink } from "react-router-dom";
 import { toggleLanguage } from "../../store/languageSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { DarkThemeToggle } from "flowbite-react";
-import { Navbar } from "flowbite-react";
+import { Navbar, Dropdown } from "flowbite-react";
+import { changeCurrency } from "../../store/currencySlice";
 function Nav() {
   const language = useSelector((state) => state.language.lang);
+  const currentCurrency = useSelector((state) => state.currency.currency);
+  console.log(currentCurrency);
   const dispatch = useDispatch();
+  // const changeCurrency = (curr) => {
+  //   dispatch(changeCurrency(curr));
+  // };
   return (
     <>
       {/* <nav className=" bg-white p-4 border-gray-200 dark:bg-gray-900">
@@ -84,7 +90,27 @@ function Nav() {
             Moviezland
           </span>
         </Navbar.Brand>
-        <Navbar.Toggle />
+        <div className="flex md:order-2">
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={<span>Currency : {currentCurrency}</span>}
+          >
+            <Dropdown.Header>
+              <span>Currency</span>
+            </Dropdown.Header>
+            <Dropdown.Item onClick={() => dispatch(changeCurrency("USD"))}>
+              USD
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => dispatch(changeCurrency("RSA"))}>
+              RSA
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => dispatch(changeCurrency("EGP"))}>
+              EGP
+            </Dropdown.Item>
+          </Dropdown>
+          <Navbar.Toggle />
+        </div>
         <Navbar.Collapse>
           <NavLink href="#" active>
             <NavLink to="/">Home</NavLink>

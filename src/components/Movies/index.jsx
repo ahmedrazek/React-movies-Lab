@@ -15,6 +15,7 @@ function Movies() {
   const getMovies = async () => {
     dispatch(getAllMovies(page));
   };
+  console.log("first");
   const getNextPage = () => {
     const nextPage = page + 1;
     setPage(nextPage);
